@@ -44,7 +44,7 @@ async def kakao():
     d = parse_date(ut)
     m = await fetch_meal(d)
     if not m: return res_kakao(f"[{d}] 급식 정보가 없습니다.")
-    return res_kakao(f"🍱 {d} 급식\n" + "\n".join([f"\n{k}\n{v}" for k, v in m.items()]))
+    return res_kakao(f"{d} 급식\n" + "\n".join([f"\n{k}\n{v}" for k, v in m.items()]))
 
 @app.route('/api/telegram', methods=['POST'])
 async def telegram():
@@ -52,7 +52,7 @@ async def telegram():
     if "message" not in upd or not TG_TOKEN: return "ok"
     cid, ut = upd["message"]["chat"]["id"], upd["message"].get("text", "")
     d, m = parse_date(ut), await fetch_meal(parse_date(ut))
-    rep = f"🍱 <b>{d} 급식</b>\n" + "\n".join([f"\n<b>[{k}]</b>\n{v}" for k, v in m.items()]) if m else f"[{d}] 급식 정보가 없습니다."
+    rep = f"<b>{d} 급식</b>\n" + "\n".join([f"\n<b>[{k}]</b>\n{v}" for k, v in m.items()]) if m else f"[{d}] 급식 정보가 없습니다."
     async with httpx.AsyncClient() as client:
         await client.post(f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage", json={"chat_id": cid, "text": rep, "parse_mode": "HTML"})
     return "ok"
