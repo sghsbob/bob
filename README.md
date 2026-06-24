@@ -1,4 +1,4 @@
-# School Meal Bot (Unified)
+# School Meal Bot
 
 [English](#english) | [한국어](#한국어)
 
@@ -60,6 +60,7 @@ MIT License. Feel free to use and modify.
 2. Vercel에 연결합니다.
 3. 상기 환경 변수를 설정합니다.
 4. 카카오톡 스킬 URL: `https://your-app.vercel.app/api/kakao`
+4-1. 카카오톡에서 '급식' 등의 키워드 등록
 5. 텔레그램 웹훅 URL: `https://your-app.vercel.app/api/telegram`
 
 ## 라이선스
